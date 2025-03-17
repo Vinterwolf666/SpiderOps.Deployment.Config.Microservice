@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-config-ms-app
+spec:
+  replicas: 1  # Número de réplicas
+  selector:
+    matchLabels:
+      app: deploy-config-ms-app
+  template:
+    metadata:
+      labels:
+        app: deploy-config-ms-app
+    spec:
+      containers:
+      - name: my-container
+        image: us-central1-docker.pkg.dev/$GOOGLE_PROJECT_ID/my-repo/$IMAGE_NAME:$IMAGE_TAG
+        ports:
+        - containerPort: 80  # Puerto de la aplicación
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: deploy-config-ms-app-service
+spec:
+  selector:
+    app: deploy-config-ms-app
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+  type: LoadBalancer
