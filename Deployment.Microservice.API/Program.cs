@@ -22,15 +22,13 @@ namespace Deployment.Microservice.API
 
             builder.Services.AddDbContext<PipelinesDBContext>(opt => opt.UseSqlServer(configuration.GetConnectionString("Value"), b => b.MigrationsAssembly("Deployment.Microservice.API")));
             
-            builder.Services.AddDbContext<CustomPipelinesDBContext>(opt => opt.UseSqlServer(configuration.GetConnectionString("Value"), b => b.MigrationsAssembly("Deployment.Microservice.API")));
+            
 
 
             builder.Services.AddScoped<IPipelinesRepository, PipelinesRepository>();
             builder.Services.AddScoped<IPipelinesServices, PipelinesServices>();
 
-           
-            builder.Services.AddScoped<ICustomerPipelinesRepository, CustomPipelinesRepository>();
-            builder.Services.AddScoped<ICustomPipelinesServices, CustomPipelinesServices>();
+
 
           
 
